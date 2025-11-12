@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Allocation' if allocation else 'New Allocation' }}</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label>Student</label>
+    <select name="StudentID" class="form-select" required>
+      {% for s in students %}
+        <option value="{{ s.StudentID }}" {% if allocation and allocation.StudentID==s.StudentID %}selected{% endif %}>{{ s.StudentName }} ({{ s.Course }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Room</label>
+    <select name="RoomID" class="form-select" required>
+      {% for r in rooms %}
+        <option value="{{ r.RoomID }}" {% if allocation and allocation.RoomID==r.RoomID %}selected{% endif %}>{{ r.RoomNumber }} - {{ r.HostelID }} ({{ r.Status }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label>Start Date</label><input type="date" name="StartDate" class="form-control" value="{{ allocation.StartDate if allocation else '' }}"></div>
+  <div class="mb-3"><label>End Date (optional)</label><input type="date" name="EndDate" class="form-control" value="{{ allocation.EndDate if allocation else '' }}"></div>
+  <button class="btn btn-primary">{{ 'Update' if allocation else 'Create' }}</button>
+  <a href="{{ url_for('main.list_allocations') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

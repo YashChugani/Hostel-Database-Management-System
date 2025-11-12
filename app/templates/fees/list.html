@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Fees</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_fee') }}">New Fee</a>
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Student</th><th>Amount</th><th>Due</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for f in fees %}
+    <tr>
+      <td>{{ f.FeeID }}</td>
+      <td>{{ f.student.StudentName }}</td>
+      <td>{{ f.Amount }}</td>
+      <td>{{ f.DueDate }}</td>
+      <td>{{ f.Status }}</td>
+      <td>
+        {% if f.Status != 'Paid' %}
+        <form method="post" action="{{ url_for('main.pay_fee', id=f.FeeID) }}" style="display:inline;">
+          <button class="btn btn-sm btn-success">Mark Paid</button>
+        </form>
+        {% endif %}
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_fee', id=f.FeeID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_fee', id=f.FeeID) }}" onclick="return confirm('Delete fee?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

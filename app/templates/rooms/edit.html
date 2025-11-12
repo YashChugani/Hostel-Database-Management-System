@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Room</h2>
+<form method="POST">
+  <div class="mb-3">
+    <label>Room Number</label>
+    <input type="text" name="RoomNumber" class="form-control" value="{{ room.RoomNumber }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Floor</label>
+    <input type="text" name="Floor" class="form-control" value="{{ room.Floor }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Capacity</label>
+    <input type="number" name="Capacity" class="form-control" value="{{ room.Capacity }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Hostel</label>
+    <select name="HostelID" class="form-select" required>
+      <option value="">-- Select Hostel --</option>
+      {% for h in hostels %}
+        <option value="{{ h.HostelID }}" {% if room.HostelID == h.HostelID %}selected{% endif %}>
+          {{ h.HostelName }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+  <a href="{{ url_for('main.list_rooms') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

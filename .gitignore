@@ -1,0 +1,59 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Flask instance folder (if used)
+instance/
+
+# Environment variables
+.env
+*.env
+
+# Database files
+*.sqlite3
+*.db
+
+# Migrations (if using Flask-Migrate / Alembic)
+migrations/
+alembic/versions/
+
+# VS Code settings
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# MacOS / Linux hidden files
+.DS_Store
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+*.out
+
+# Python packaging
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Pytest / coverage
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Node modules (if using frontend JS tooling)
+node_modules/
+
+# Static assets build folder (if using build tools)
+static/dist/

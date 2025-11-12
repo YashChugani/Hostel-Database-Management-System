@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Hostels</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_hostel') }}">New Hostel</a>
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr><th>ID</th><th>Name</th><th>Type</th><th>Warden</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for h in hostels %}
+    <tr>
+      <td>{{ h.HostelID }}</td>
+      <td>{{ h.HostelName }}</td>
+      <td>{{ h.Type }}</td>
+      <td>{{ h.warden.StaffName if h.warden else '—' }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_hostel', hid=h.HostelID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_hostel', hid=h.HostelID) }}" onclick="return confirm('Delete hostel?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

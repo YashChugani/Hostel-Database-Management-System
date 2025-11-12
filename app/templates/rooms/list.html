@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Rooms</h2>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
+</div>
+
+<!-- Rooms Table -->
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Room Number</th>
+      <th>Floor</th>
+      <th>Capacity</th>
+      <th>Status</th>
+      <th>Occupants</th>
+      <th>Hostel</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rooms %}
+    <tr>
+      <td>{{ r.RoomID }}</td>
+      <td>{{ r.RoomNumber }}</td>
+      <td>{{ r.Floor }}</td>
+      <td>{{ r.Capacity }}</td>
+      <td>{{ r.Status or 'Available' }}</td>
+      <td>{{ r.Occupants or 0 }}</td>
+      <td>{{ r.hostel.HostelName if r.hostel else 'N/A' }}</td>
+      <td>
+        <a href="{{ url_for('main.edit_room', id=r.RoomID) }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="{{ url_for('main.delete_room', id=r.RoomID) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this room?');">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Add Room Modal -->
+<div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" action="{{ url_for('main.add_room') }}">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addRoomLabel">Add Room</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Room Number</label>
+            <input type="text" name="RoomNumber" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Floor</label>
+            <input type="text" name="Floor" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Capacity</label>
+            <input type="number" name="Capacity" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Hostel</label>
+            <select name="HostelID" class="form-select" required>
+              <option value="">-- Select Hostel --</option>
+              {% for h in hostels %}
+                <option value="{{ h.HostelID }}">{{ h.HostelName }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Add Room</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

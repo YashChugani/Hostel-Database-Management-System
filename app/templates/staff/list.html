@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Staff</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_staff') }}">New Staff</a>
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Name</th><th>Role</th><th>Phone</th><th>Email</th><th>Hostel</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for s in staff %}
+    <tr>
+      <td>{{ s.StaffID }}</td>
+      <td>{{ s.StaffName }}</td>
+      <td>{{ s.Role }}</td>
+      <td>{{ s.Phone }}</td>
+      <td>{{ s.Email }}</td>
+      <td>{{ s.HostelID or '—' }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_staff', id=s.StaffID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_staff', id=s.StaffID) }}" onclick="return confirm('Delete staff?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Complaint' if complaint else 'New Complaint' }}</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label>Student</label>
+    <select name="StudentID" class="form-select" required>
+      {% for s in students %}
+      <option value="{{ s.StudentID }}" {% if complaint and complaint.StudentID==s.StudentID %}selected{% endif %}>{{ s.StudentName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea name="Description" class="form-control" required>{{ complaint.Description if complaint else '' }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label>Status</label>
+    <select name="Status" class="form-select">
+      <option value="Open" {% if complaint and complaint.Status=='Open' %}selected{% endif %}>Open</option>
+      <option value="In-Progress" {% if complaint and complaint.Status=='In-Progress' %}selected{% endif %}>In-Progress</option>
+      <option value="Resolved" {% if complaint and complaint.Status=='Resolved' %}selected{% endif %}>Resolved</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if complaint else 'Create' }}</button>
+  <a href="{{ url_for('main.list_complaints') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

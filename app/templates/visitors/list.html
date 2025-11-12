@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Visitors</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_visitor') }}">Add Visitor</a>
+</div>
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Name</th><th>Phone</th><th>VisitDate</th><th>Purpose</th><th>Host</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for v in visitors %}
+    <tr>
+      <td>{{ v.VisitorID }}</td>
+      <td>{{ v.Name }}</td>
+      <td>{{ v.Phone }}</td>
+      <td>{{ v.VisitDate }}</td>
+      <td>{{ v.Purpose }}</td>
+      <td>{{ v.host_student.StudentName if v.host_student else '—' }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_visitor', id=v.VisitorID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_visitor', id=v.VisitorID) }}" onclick="return confirm('Delete?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

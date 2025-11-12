@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Allocations</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_allocation') }}">New Allocation</a>
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Student</th><th>Room</th><th>Start</th><th>End</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for a in allocations %}
+    <tr>
+      <td>{{ a.AllocationID }}</td>
+      <td>{{ a.student.StudentName }}</td>
+      <td>{{ a.room.RoomNumber }} ({{ a.room.HostelID }})</td>
+      <td>{{ a.StartDate }}</td>
+      <td>{{ a.EndDate or '-' }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_allocation', id=a.AllocationID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_allocation', id=a.AllocationID) }}" onclick="return confirm('Delete allocation?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

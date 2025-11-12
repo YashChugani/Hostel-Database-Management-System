@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Hostel' if hostel else 'Add Hostel' }}</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label>Hostel ID (single char)</label>
+    <input name="HostelID" class="form-control" required value="{{ hostel.HostelID if hostel else '' }}" {% if hostel %} readonly {% endif %}>
+  </div>
+  <div class="mb-3">
+    <label>Hostel Name</label>
+    <input name="HostelName" class="form-control" required value="{{ hostel.HostelName if hostel else '' }}">
+  </div>
+  <div class="mb-3">
+    <label>Type</label>
+    <select name="Type" class="form-select">
+      <option value="Boys" {% if hostel and hostel.Type=='Boys' %}selected{% endif %}>Boys</option>
+      <option value="Girls" {% if hostel and hostel.Type=='Girls' %}selected{% endif %}>Girls</option>
+      <option value="Co-ed" {% if hostel and hostel.Type=='Co-ed' %}selected{% endif %}>Co-ed</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Warden</label>
+    <select name="WardenID" class="form-select">
+      <option value="">-- none --</option>
+      {% for w in wardens %}
+      <option value="{{ w.StaffID }}" {% if hostel and hostel.WardenID==w.StaffID %}selected{% endif %}>{{ w.StaffName }} ({{ w.HostelID }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if hostel else 'Create' }}</button>
+  <a href="{{ url_for('main.list_hostels') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

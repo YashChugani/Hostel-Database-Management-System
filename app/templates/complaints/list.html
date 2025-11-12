@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Complaints</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_complaint') }}">File Complaint</a>
+</div>
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Student</th><th>Description</th><th>Status</th><th>Filed</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for c in complaints %}
+    <tr>
+      <td>{{ c.ComplaintID }}</td>
+      <td>{{ c.student.StudentName }}</td>
+      <td>{{ c.Description }}</td>
+      <td>{{ c.Status }}</td>
+      <td>{{ c.FiledDate }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_complaint', id=c.ComplaintID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_complaint', id=c.ComplaintID) }}" onclick="return confirm('Delete?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

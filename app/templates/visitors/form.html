@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Visitor' if visitor else 'Add Visitor' }}</h3>
+<form method="POST">
+  <div class="mb-3"><label>Name</label><input name="Name" class="form-control" value="{{ visitor.Name if visitor else '' }}" required></div>
+  <div class="mb-3"><label>Phone</label><input name="Phone" class="form-control" value="{{ visitor.Phone if visitor else '' }}"></div>
+  <div class="mb-3"><label>Visit Date</label><input name="VisitDate" type="date" class="form-control" value="{{ visitor.VisitDate if visitor else '' }}"></div>
+  <div class="mb-3"><label>Purpose</label><input name="Purpose" class="form-control" value="{{ visitor.Purpose if visitor else '' }}"></div>
+  <div class="mb-3">
+    <label>Host Student</label>
+    <select name="HostStudentID" class="form-select">
+      <option value="">-- none --</option>
+      {% for s in students %}
+      <option value="{{ s.StudentID }}" {% if visitor and visitor.HostStudentID==s.StudentID %}selected{% endif %}>{{ s.StudentName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if visitor else 'Create' }}</button>
+  <a href="{{ url_for('main.list_visitors') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

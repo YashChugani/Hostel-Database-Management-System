@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Staff' if staff else 'Add Staff' }}</h3>
+<form method="POST">
+  <div class="mb-3"><label>Name</label><input name="StaffName" class="form-control" required value="{{ staff.StaffName if staff else '' }}"></div>
+  <div class="mb-3">
+    <label>Role</label>
+    <select name="Role" class="form-select">
+      <option value="Warden" {% if staff and staff.Role=='Warden' %}selected{% endif %}>Warden</option>
+      <option value="Security" {% if staff and staff.Role=='Security' %}selected{% endif %}>Security</option>
+      <option value="Maintenance" {% if staff and staff.Role=='Maintenance' %}selected{% endif %}>Maintenance</option>
+    </select>
+  </div>
+  <div class="mb-3"><label>Phone</label><input name="Phone" class="form-control" value="{{ staff.Phone if staff else '' }}"></div>
+  <div class="mb-3"><label>Email</label><input name="Email" class="form-control" value="{{ staff.Email if staff else '' }}"></div>
+  <div class="mb-3">
+    <label>Hostel</label>
+    <select name="HostelID" class="form-select">
+      <option value="">-- none --</option>
+      {% for h in hostels %}
+      <option value="{{ h.HostelID }}" {% if staff and staff.HostelID==h.HostelID %}selected{% endif %}>{{ h.HostelName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if staff else 'Create' }}</button>
+  <a href="{{ url_for('main.list_staff') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+  <h2>Maintenance Requests</h2>
+  <a class="btn btn-primary" href="{{ url_for('main.add_maintenance') }}">New Request</a>
+</div>
+<table class="table table-striped">
+  <thead class="table-dark"><tr><th>ID</th><th>Room</th><th>Requested By</th><th>Assigned To</th><th>Status</th><th>Requested At</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for r in requests %}
+    <tr>
+      <td>{{ r.RequestID }}</td>
+      <td>{{ r.room.RoomNumber if r.room else r.RoomID }}</td>
+      <td>{{ r.requester.StudentName if r.requester else r.RequestedBy }}</td>
+      <td>{{ r.assigned_staff.StaffName if r.assigned_staff else '-' }}</td>
+      <td>{{ r.Status }}</td>
+      <td>{{ r.RequestDate }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('main.edit_maintenance', id=r.RequestID) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{{ url_for('main.delete_maintenance', id=r.RequestID) }}" onclick="return confirm('Delete?')">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

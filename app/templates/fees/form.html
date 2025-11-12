@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Fee' if fee else 'Add Fee' }}</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label>Student</label>
+    <select name="StudentID" class="form-select" required>
+      {% for s in students %}
+      <option value="{{ s.StudentID }}" {% if fee and fee.StudentID==s.StudentID %}selected{% endif %}>{{ s.StudentName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label>Amount</label><input name="Amount" type="number" step="0.01" class="form-control" value="{{ fee.Amount if fee else '' }}" required></div>
+  <div class="mb-3"><label>Due Date</label><input name="DueDate" type="date" class="form-control" value="{{ fee.DueDate if fee else '' }}" required></div>
+  <div class="mb-3"><label>Payment Date</label><input name="PaymentDate" type="date" class="form-control" value="{{ fee.PaymentDate if fee else '' }}"></div>
+  <div class="mb-3">
+    <label>Status</label>
+    <select name="Status" class="form-select">
+      <option value="Unpaid" {% if fee and fee.Status=='Unpaid' %}selected{% endif %}>Unpaid</option>
+      <option value="Paid" {% if fee and fee.Status=='Paid' %}selected{% endif %}>Paid</option>
+      <option value="Overdue" {% if fee and fee.Status=='Overdue' %}selected{% endif %}>Overdue</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if fee else 'Create' }}</button>
+  <a href="{{ url_for('main.list_fees') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

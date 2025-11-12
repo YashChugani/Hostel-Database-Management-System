@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Edit Request' if req else 'New Maintenance Request' }}</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label>Room</label>
+    <select name="RoomID" class="form-select">
+      {% for r in rooms %}
+      <option value="{{ r.RoomID }}" {% if req and req.RoomID==r.RoomID %}selected{% endif %}>{{ r.RoomNumber }} ({{ r.HostelID }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Requested By (student)</label>
+    <select name="RequestedBy" class="form-select">
+      {% for s in students %}
+      <option value="{{ s.StudentID }}" {% if req and req.RequestedBy==s.StudentID %}selected{% endif %}>{{ s.StudentName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Assign To (maintenance)</label>
+    <select name="AssignedTo" class="form-select">
+      <option value="">-- none --</option>
+      {% for st in staff %}
+      <option value="{{ st.StaffID }}" {% if req and req.AssignedTo==st.StaffID %}selected{% endif %}>{{ st.StaffName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Status</label>
+    <select name="Status" class="form-select">
+      <option value="Pending" {% if req and req.Status=='Pending' %}selected{% endif %}>Pending</option>
+      <option value="Completed" {% if req and req.Status=='Completed' %}selected{% endif %}>Completed</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">{{ 'Update' if req else 'Create' }}</button>
+  <a href="{{ url_for('main.list_maintenance') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}
