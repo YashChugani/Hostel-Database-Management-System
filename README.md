@@ -85,18 +85,65 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 
 ---
 
-## 🔗 Project Structure
+## Project Structure
 
-hostel-management/
-├── app/
+📂 hostel-management/
+├── 📂 app/
+│   ├── __init__.py
 │   ├── models.py
-│   ├── routes/
-│   ├── templates/
-│   └── static/
-├── venv/
+│   ├── 📂 routes/
+│   │   ├── __init__.py
+│   │   ├── allocations.py
+│   │   ├── complaints.py
+│   │   ├── dashboard.py
+│   │   ├── fees.py
+│   │   ├── hostels.py
+│   │   ├── maintenance.py
+│   │   ├── rooms.py
+│   │   ├── staff.py
+│   │   ├── students.py
+│   │   └── visitors.py
+│   ├── 📂 static/
+│   │   └── 📂 css/
+│   │       └── style.css
+│   └── 📂 templates/
+│       ├── 📂 allocations/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 complaints/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 fees/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 hostels/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 maintenance/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 rooms/
+│       │   ├── edit.html
+│       │   └── list.html
+│       ├── 📂 staff/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── 📂 students/
+│       │   ├── add.html
+│       │   ├── edit.html
+│       │   └── list.html
+│       ├── 📂 visitors/
+│       │   ├── form.html
+│       │   └── list.html
+│       ├── base.html
+│       └── dashboard.html
 ├── run.py
-├── requirements.txt
+├── Requirements.txt
+├── README.md
+├── schema_mysql.sql
+├── seed_data.py
 └── .gitignore
+
 
 ---
 
@@ -108,5 +155,4 @@ This project is licensed under the MIT License. See LICENSE for details.
 
 ## ⚡ Author
 
-Yash Chugani
-GitHub: [https://github.com/YashChugani](https://github.com/YashChugani)
+Yash Chugani - [GitHub] (https://github.com/YashChugani)
