@@ -32,7 +32,7 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 - **Backend:** Python, Flask, SQLAlchemy  
 - **Frontend:** HTML, CSS, Bootstrap 5, Jinja2 templates  
 - **Charts & Visualizations:** Chart.js  
-- **Database:** SQLite (or any SQLAlchemy-supported DB)  
+- **Database:** MySQL (or any SQLAlchemy-supported DB) 
 - **Version Control:** Git & GitHub  
 
 ---
@@ -41,8 +41,8 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 
 1. **Clone the repository:**
 ```bash
-    git clone https://github.com/YOUR_USERNAME/hostel-management.git
-    cd hostel-management
+    git clone https://github.com/YashChugani/Hostel-Database-Management-System.git
+    cd hostel-database-management-system
 ```
 
 2. **Create a virtual environment and activate it:**
@@ -64,7 +64,10 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 # Create a .env file in the project root
     FLASK_APP=run.py
     FLASK_ENV=development
-    DATABASE_URL=sqlite:///hostel.db
+    DATABASE_USER=your_db_user
+    DATABASE_PASS=your_db_password
+    DATABASE_HOST=localhost
+    DATABASE_NAME=your_db_name
     SECRET_KEY=your_secret_key_here
 ```
 
@@ -86,7 +89,7 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 ---
 
 ## Project Structure
-
+```
 📂 hostel-management/
 ├── 📂 app/
 │   ├── __init__.py
@@ -143,7 +146,7 @@ A full-featured **web-based hostel management system** built with **Flask**, **S
 ├── schema_mysql.sql
 ├── seed_data.py
 └── .gitignore
-
+```
 
 ---
 
@@ -155,4 +158,4 @@ This project is licensed under the MIT License. See LICENSE for details.
 
 ## ⚡ Author
 
-Yash Chugani - [GitHub] (https://github.com/YashChugani)
+Yash Chugani - [GitHub](https://github.com/YashChugani)
